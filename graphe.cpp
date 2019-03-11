@@ -14,9 +14,9 @@ graphe::graphe(std::string nomFichier){
     double x,y;
     //lecture des sommets
     for (int i=0; i<ordre; ++i){
-        ifs>>id; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
-        ifs>>x; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
-        ifs>>y; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
+        ifs>>id; if(ifs.fail()) throw std::runtime_error("Probleme lecture donnï¿½es sommet");
+        ifs>>x; if(ifs.fail()) throw std::runtime_error("Probleme lecture donnï¿½es sommet");
+        ifs>>y; if(ifs.fail()) throw std::runtime_error("Probleme lecture donnï¿½es sommet");
         m_sommets.insert({id,new Sommet{id,x,y}});
     }
     int taille;
@@ -26,17 +26,36 @@ graphe::graphe(std::string nomFichier){
     std::string id_voisin;
     //lecture des aretes
     for (int i=0; i<taille; ++i){
-        //lecture des ids des deux extrémités
+        //lecture des ids des deux extrï¿½mitï¿½s
         ifs>>id; if(ifs.fail()) throw std::runtime_error("Probleme lecture arete sommet 1");
         ifs>>id_voisin; if(ifs.fail()) throw std::runtime_error("Probleme lecture arete sommet 2");
-        //ajouter chaque extrémité à la liste des voisins de l'autre (graphe non orienté)
+        //ajouter chaque extrï¿½mitï¿½ ï¿½ la liste des voisins de l'autre (graphe non orientï¿½)
         (m_sommets.find(id))->second->ajouterVoisin((m_sommets.find(id_voisin))->second);
-        (m_sommets.find(id_voisin))->second->ajouterVoisin((m_sommets.find(id))->second);//remove si graphe orienté
+        (m_sommets.find(id_voisin))->second->ajouterVoisin((m_sommets.find(id))->second);//remove si graphe orientï¿½
     }
 }
+
+graphe::~graphe()
+{
+    //dtor
+}
+
+/*------------------------------------------------------------------------------*/
+
 void graphe::afficher() const{
     std::cout<<"graphe : "<<std::endl;
-    std::cout<<"  coder l'affichage ! "<<std::endl;
+    std::cout<<"  ordre : "<< m_sommets.size() << std::endl;
+
+    for(auto psommet : m_sommets)
+    {
+      std::cout << std::endl;
+      std::cout << "  sommets : ";
+      psommet.second -> afficherData();
+      std::cout << std::endl;
+      psommet.second -> afficherVoisins();
+    }
+    std::cout << std::endl;
+
 }
 
 void graphe::parcoursBFS(std::string id) const{
@@ -84,8 +103,4 @@ int graphe::rechercher_afficherToutesCC() const{
     std::cout<<"composantes connexes :"<<std::endl;
     std::cout<<"recherche et affichage de toutes les composantes connexes a coder"<<std::endl;
     return i;
-}
-graphe::~graphe()
-{
-    //dtor
 }
