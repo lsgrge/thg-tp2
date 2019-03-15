@@ -40,7 +40,7 @@ std::unordered_map<std::string,std::string> Sommet::parcoursBFS() const
         if((l_pred.find(s->m_voisins[i]->m_id)) == (l_pred.end()) && (s->m_voisins[i] != this))
         {
           file.push(s->m_voisins[i]);
-          l_pred.insert(s->m_voisins[i]->m_id, s->m_id);
+          l_pred.insert({s->m_voisins[i]->m_id, s->m_id});
         }
 
       }
@@ -52,7 +52,27 @@ std::unordered_map<std::string,std::string> Sommet::parcoursBFS() const
 
 std::unordered_map<std::string,std::string> Sommet::parcoursDFS() const{
     std::unordered_map<std::string,std::string> l_pred;
-    std::cout<<"DFS a completer"<<std::endl;
+
+    std::stack<const Sommet*> pile;
+    const Sommet* s;
+    pile.push(this);
+
+    while(!pile.empty())
+    {
+      s = pile.top(); //on récupère le premier élément de la file
+      pile.pop(); //on vide la file du premier élément
+
+      for(size_t i = 0; i < s->m_voisins.size(); i++)
+      {
+
+        if((l_pred.find(s->m_voisins[i]->m_id)) == (l_pred.end()) && (s->m_voisins[i] != this))
+        {
+          pile.push(s->m_voisins[i]);
+          l_pred.insert( {s->m_voisins[i]->m_id, s->m_id});
+        }
+
+      }
+    }
     return l_pred;
 }
 
