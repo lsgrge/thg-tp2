@@ -8,17 +8,18 @@
 class Sommet
 {
     public:
-        ///constructeur qui reçoit en params les données du sommet
+        ///constructeur qui reï¿½oit en params les donnï¿½es du sommet
         Sommet(std::string,double,double);
         void ajouterVoisin(const Sommet*);
         void afficherData() const;
         void afficherVoisins() const;
-        ///méthode de parcours en largeur du graphe à partir du sommet
-        ///renvoie les prédécesseurs sous forme d'une map (clé=id du sommet,valeur=id de son prédécesseur)
+        int GetDegre() const; 
+        ///mï¿½thode de parcours en largeur du graphe ï¿½ partir du sommet
+        ///renvoie les prï¿½dï¿½cesseurs sous forme d'une map (clï¿½=id du sommet,valeur=id de son prï¿½dï¿½cesseur)
         std::unordered_map<std::string,std::string> parcoursBFS() const;
-         ///méthode de parcours en profondeur du graphe à partir du sommet
+         ///mï¿½thode de parcours en profondeur du graphe ï¿½ partir du sommet
         std::unordered_map<std::string,std::string> parcoursDFS() const;
-        ///méthode qui recherche la composante connexe du sommet
+        ///mï¿½thode qui recherche la composante connexe du sommet
         ///renvoie la liste des ids des sommets de la composante
         std::unordered_set<std::string> rechercherCC() const;
         ~Sommet();
@@ -29,7 +30,7 @@ class Sommet
         /// Voisinage : liste d'adjacence
         std::vector<const Sommet*> m_voisins;
 
-        /// Données spécifiques du sommet
+        /// Donnï¿½es spï¿½cifiques du sommet
         std::string m_id; // Identifiant
         double m_x, m_y; // Position
 

@@ -125,3 +125,21 @@ int graphe::rechercher_afficherToutesCC() const{
 
     return i;
 }
+
+
+int graphe::IsEulerien() const{
+
+  int cmptDeggre = 0;
+
+  for(auto s : m_sommets)
+  {
+    if(s.second->GetDegre() %2 != 0)
+      cmptDeggre++;
+  }
+  if(cmptDeggre == 2) // chaine eulerienne
+    return 1;
+  if(cmptDeggre == 0) // cycle
+    return 2;
+
+  return 0; // rien
+}

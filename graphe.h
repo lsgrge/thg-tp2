@@ -23,6 +23,8 @@ class graphe
         ///recherche et affiche les composantes connexes
         ///retourne le nombre de composantes connexes
         int rechercher_afficherToutesCC() const;
+        /// Determine si un graphe est eulerien ou non
+        int IsEulerien() const;
 
     protected:
 

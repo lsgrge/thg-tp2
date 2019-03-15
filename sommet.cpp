@@ -91,6 +91,12 @@ std::unordered_set<std::string> Sommet::rechercherCC() const{
     return cc;
 }
 
+int Sommet::GetDegre() const{
+  return m_voisins.size();
+}
+
+
+
 /*---------------------------------------------------------*/
 
 Sommet::~Sommet()
