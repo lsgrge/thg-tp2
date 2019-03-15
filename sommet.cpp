@@ -79,9 +79,20 @@ std::unordered_map<std::string,std::string> Sommet::parcoursDFS() const{
 
 std::unordered_set<std::string> Sommet::rechercherCC() const{
     std::unordered_set<std::string> cc;
-    std::cout<<"rechercherCC a coder"<<std::endl;
+    //std::cout<<"rechercherCC a coder"<<std::endl;
+    std::unordered_map<std::string, std::string> l_pred;
+
+    l_pred = parcoursBFS();
+    cc.insert(m_id);
+
+    for(auto s: l_pred)
+      cc.insert(s.first);
+
     return cc;
 }
+
+/*---------------------------------------------------------*/
+
 Sommet::~Sommet()
 {
     //dtor

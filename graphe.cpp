@@ -101,6 +101,27 @@ void graphe::afficherDFS(std::string id) const{
 int graphe::rechercher_afficherToutesCC() const{
     int i=0;
     std::cout<<"composantes connexes :"<<std::endl;
-    std::cout<<"recherche et affichage de toutes les composantes connexes a coder"<<std::endl;
+
+    std::unordered_set<std::string> sommet_decouvert;
+    std::unordered_set<std::string> cc;
+
+    for(auto s : m_sommets)
+    {
+      if (sommet_decouvert.find(s.first) == sommet_decouvert.end()) //Si le sommet n'est pas dans ma composante connexe
+      {
+        std::cout << " composante groupe " << i+1 << ": " << std::endl;
+        cc = s.second->rechercherCC();
+
+        for(auto id : cc)
+        {
+          std::cout << id << "    ";
+          sommet_decouvert.insert(id);
+        }
+        std::cout << std::endl << std::endl;
+        ++i;
+      }
+
+    }
+
     return i;
 }
